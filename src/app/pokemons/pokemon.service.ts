@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { PagedData } from './paged-data.model';
 import { Pokemon } from './pokemon.model';
-import {PokemonDetails} from "./pokemondetails.module";
+import { PokemonDetails } from "./pokemondetails.module";
 
 @Injectable({
   providedIn: 'root'
@@ -11,8 +11,9 @@ import {PokemonDetails} from "./pokemondetails.module";
 export class PokemonService {
   constructor(private http: HttpClient) { }
 
-  getPokemons():Observable<PagedData<Pokemon>>{
-    return this.http.get<PagedData<Pokemon>>('http://app-ec21e68e-3e55-42d7-b1ae-3eef7507a353.cleverapps.io/pokemons');
+  getPokemons(o : number, l : number = 20):Observable<PagedData<Pokemon>>{
+    const params = new HttpParams().set('limit',l).set('offset',o);
+    return this.http.get<PagedData<Pokemon>>('http://app-ec21e68e-3e55-42d7-b1ae-3eef7507a353.cleverapps.io/pokemons',{params});
   }
 
   getPokemonsDetails(id:number): Observable<PokemonDetails>{
