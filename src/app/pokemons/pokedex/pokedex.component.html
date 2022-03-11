@@ -1,0 +1,11 @@
+<mat-sidenav-container #pokedex_container>
+
+    <mat-sidenav class="pokedex-sidenav"  mode="side" position="start" opened >
+        <sw-pokemon-list (pokemonDisplay)="afficherPokemonDetail($event)" ></sw-pokemon-list>
+    </mat-sidenav>
+
+    <mat-sidenav-content>
+       <sw-pokemon-detail [poke]="pk" ></sw-pokemon-detail>
+    </mat-sidenav-content>
+
+</mat-sidenav-container>

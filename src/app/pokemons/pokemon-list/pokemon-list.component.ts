@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Output, EventEmitter } from '@angular/core';
+
 import { PagedData } from '../paged-data.model';
 import { Pokemon } from '../pokemon.model';
 import { PokemonService } from '../pokemon.service';
@@ -11,6 +13,7 @@ import { PokemonService } from '../pokemon.service';
 })
 export class PokemonListComponent implements OnInit {
 
+  @Output() pokemonDisplay = new EventEmitter<Pokemon>();
   pokemons ?: PagedData<Pokemon>
 
   constructor(private pokemonService : PokemonService) { }
@@ -23,6 +26,10 @@ export class PokemonListComponent implements OnInit {
     console.log('scrolled!!');
     this.pokemons!.offset += this.pokemons!.limit
     this.pokemonService.getPokemons(this.pokemons!.offset,this.pokemons!.limit).subscribe(rs => this.pokemons!.data = this.pokemons!.data.concat(rs.data));
+  }
+
+  afficherPokemonDetail(pk : Pokemon){
+    this.pokemonDisplay.emit(pk)
   }
 
 }
