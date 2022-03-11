@@ -11,7 +11,7 @@ import { PokemonDetails } from "./pokemondetails.module";
 export class PokemonService {
   constructor(private http: HttpClient) { }
 
-  getPokemons(o : number, l : number = 20):Observable<PagedData<Pokemon>>{
+  getPokemons(o : number, l : number):Observable<PagedData<Pokemon>>{
     const params = new HttpParams().set('limit',l).set('offset',o);
     return this.http.get<PagedData<Pokemon>>('http://app-ec21e68e-3e55-42d7-b1ae-3eef7507a353.cleverapps.io/pokemons',{params});
   }
