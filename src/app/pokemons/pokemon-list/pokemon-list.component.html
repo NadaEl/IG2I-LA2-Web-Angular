@@ -1,5 +1,5 @@
 <!-- <h2>My Pokemons</h2> -->
-<input type="search" id="site-search" class="search-input" name="q">
+<input id="site-search" class="search-input" name="q" [ngModel]="search" (ngModelChange)="onChangeEvent($event)" >
 <mat-nav-list class="search-results" infiniteScroll [scrollWindow]="false" (scrolled)="onScroll()">
     <mat-list-item *ngFor="let pk of pokemons?.data" (click)="afficherPokemonDetail(pk)">  
         <img matListAvatar src="assets/img/sprites/{{pk.id}}.png">

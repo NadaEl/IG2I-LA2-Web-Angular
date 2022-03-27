@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnChanges, SimpleChanges } from '@angular/core';
 import { Output, EventEmitter } from '@angular/core';
 
 import { PagedData } from '../paged-data.model';
@@ -15,11 +15,22 @@ export class PokemonListComponent implements OnInit {
 
   @Output() pokemonDisplay = new EventEmitter<Pokemon>();
   pokemons ?: PagedData<Pokemon>
+  search ?: String
 
   constructor(private pokemonService : PokemonService) { }
 
   ngOnInit(): void {
     this.pokemonService.getPokemons(0,20).subscribe(rs => this.pokemons = rs);
+  }
+
+  onChangeEvent(search: String){
+    this.search = search
+    if (search.length != 0) {
+      this.pokemonService.getPokemonsSearch(search).subscribe(rs => this.pokemons = rs)
+    }
+    else{
+      this.pokemonService.getPokemons(0,20).subscribe(rs => this.pokemons = rs);
+    }
   }
 
   onScroll() {

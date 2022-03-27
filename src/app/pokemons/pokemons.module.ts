@@ -14,6 +14,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { PokedexComponent } from './pokedex/pokedex.component';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -23,6 +24,7 @@ import { PokedexComponent } from './pokedex/pokedex.component';
   ],
   imports: [
     CommonModule,
+    FormsModule,
     MatListModule,
     RouterModule,
     MatGridListModule,

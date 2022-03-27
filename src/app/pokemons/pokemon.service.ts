@@ -20,4 +20,8 @@ export class PokemonService {
     return this.http.get<PokemonDetails>('http://app-ec21e68e-3e55-42d7-b1ae-3eef7507a353.cleverapps.io/pokemons/'+id);
   }
 
+  getPokemonsSearch(search : String): Observable<PagedData<Pokemon>>{
+    return this.http.get<PagedData<Pokemon>>('http://app-ec21e68e-3e55-42d7-b1ae-3eef7507a353.cleverapps.io/pokemons?search='+search)
+  }
+
 }
