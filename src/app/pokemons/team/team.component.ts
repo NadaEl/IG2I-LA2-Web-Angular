@@ -25,7 +25,7 @@ export class TeamComponent implements OnInit {
       this.teamService.teamToken = rs.access_token
       this.teamService.getTeam().subscribe(teamIds => {
         this.teamService.teamIds = teamIds
-        console.log(this.teamService.teamIds)
+        console.log("2\n"+this.teamService.teamIds)
         this.getPokemonsTeam()
       })
     } )
@@ -39,12 +39,17 @@ export class TeamComponent implements OnInit {
   }
 
   getPokemonsTeam() {
-      this.teamService.getTeam().pipe(
-        switchMap(arrayIds => {
-          const pokemonObservables : Observable<Pokemon>[] = arrayIds.map((id: number) => this.pokemonService.getPokemonsDetails(id))
-          return forkJoin(pokemonObservables);
+    this.teamService.subject.subscribe(idsReceived => {
+      this.teamService.getTeam().subscribe(teamIds =>
+        {
+          forkJoin(teamIds.map( id =>
+            this.pokemonService.getPokemonsDetails(id)
+            )).subscribe(arrayPokemons => 
+              {
+                this.pokemons = arrayPokemons
+              })
         })
-      ).subscribe(arrayPokemons => this.pokemons = arrayPokemons)
+    })
   }
 
   afficherPokemonDetail(pk : Pokemon){
