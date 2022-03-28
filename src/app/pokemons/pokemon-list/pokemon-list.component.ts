@@ -4,6 +4,7 @@ import { Output, EventEmitter } from '@angular/core';
 import { PagedData } from '../paged-data.model';
 import { Pokemon } from '../pokemon.model';
 import { PokemonService } from '../pokemon.service';
+import { TeamService } from '../team.service';
 
 @Component({
   selector: 'sw-pokemon-list',
@@ -17,7 +18,7 @@ export class PokemonListComponent implements OnInit {
   pokemons ?: PagedData<Pokemon>
   search ?: String
 
-  constructor(private pokemonService : PokemonService) { }
+  constructor(private pokemonService : PokemonService,private teamService: TeamService) { }
 
   ngOnInit(): void {
     this.pokemonService.getPokemons(0,20).subscribe(rs => this.pokemons = rs);
@@ -41,6 +42,17 @@ export class PokemonListComponent implements OnInit {
 
   afficherPokemonDetail(pk : Pokemon){
     this.pokemonDisplay.emit(pk)
+  }
+
+  addPkToTeam(pk: Pokemon){
+    if(this.teamService.teamIds.length < 6)
+    {
+      var elt = document.getElementById(pk.id.toString())
+      this.teamService.addPokemonToTeam(pk.id || -1)
+    }
+    else {
+      alert('Vous avez atteint la limite de 6 pokemons dans votre équipe !')
+    }
   }
 
 }

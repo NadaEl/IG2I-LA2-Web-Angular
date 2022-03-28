@@ -4,7 +4,7 @@
     <mat-grid-tile>
         <div>
         <img mat-card-lg-image src="assets/img/official-artwork/{{ pokemons.id }}.png">
-        <div><span>No. </span>{{ pokemons.id | number:'3.0-1' }}</div>
+        <div style="text-align: center;"><span>No. </span>{{ pokemons.id | number:'3.0-1' }}</div>
         </div>
     </mat-grid-tile>
     <mat-grid-tile>
@@ -15,15 +15,11 @@
         </mat-list-item>
         <mat-list-item role="listitem"><audio autoplay #audio src="assets/audio/{{pokemons.id}}.mp3"></audio></mat-list-item>
         <mat-list-item role="listitem">
-
-            <mat-form-field>
             <mat-chip-list #chipList>
                 <mat-chip *ngFor="let pk of pokemons.types">
                     {{ pk }}
                 </mat-chip>
             </mat-chip-list>
-            <input [matChipInputFor]="chipList">
-            </mat-form-field>
         </mat-list-item>
         <mat-list-item role="listitem"><mat-card-title><span>Taille: </span>{{ pokemons.height | number:'1.1-2' }}<span> m</span></mat-card-title></mat-list-item>
         <mat-list-item role="listitem"><mat-card-title><span>Poids: </span>{{ pokemons.weight | number:'2.1-2'}}<span> kg</span></mat-card-title></mat-list-item>

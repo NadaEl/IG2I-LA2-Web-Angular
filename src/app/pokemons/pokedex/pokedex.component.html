@@ -1,11 +1,22 @@
 <mat-sidenav-container #pokedex_container>
 
     <mat-sidenav class="pokedex-sidenav"  mode="side" position="start" opened >
-        <sw-pokemon-list (pokemonDisplay)="afficherPokemonDetail($event)" ></sw-pokemon-list>
+        <mat-tab-group mat-align-tabs="start">
+            <mat-tab label="Pokemon List">
+                <sw-pokemon-list (pokemonDisplay)="afficherPokemonDetail($event)" ></sw-pokemon-list>
+            </mat-tab>
+            <mat-tab label="My Team">
+                <!-- call team component here -->
+                <sw-team (pokemonDisplay)="afficherPokemonDetail($event)"></sw-team>
+            </mat-tab>
+        </mat-tab-group>
+        
     </mat-sidenav>
 
     <mat-sidenav-content>
        <sw-pokemon-detail [poke]="pk" ></sw-pokemon-detail>
     </mat-sidenav-content>
+
+    
 
 </mat-sidenav-container>

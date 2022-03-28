@@ -1,0 +1,12 @@
+<mat-nav-list class="team">
+    <mat-list-item *ngFor="let pk of pokemons" (click)="afficherPokemonDetail(pk)">  
+        <img matListAvatar src="assets/img/sprites/{{pk.id}}.png">
+        <p matLine>
+            <span> {{pk.id}} </span>
+            <span > . {{pk.name}} </span>
+        </p>
+        <button style="background: none;border: none;" >
+            <img matListAvatar src="assets/img/minusicon.png" (click)="deletePokemonFromTeam(pk)">
+        </button>
+    </mat-list-item>
+</mat-nav-list>
