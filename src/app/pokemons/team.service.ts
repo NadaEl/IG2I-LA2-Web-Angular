@@ -46,7 +46,6 @@ export class TeamService {
         this.teamIds.splice(index, 1)
         this.setTeam(this.teamIds).subscribe(_ => {
           this.subject.next(this.teamIds)
-          this.getTeam()
         })
       }
     });
@@ -60,7 +59,6 @@ export class TeamService {
       this.teamIds.push(id)
       this.setTeam(this.teamIds).subscribe(_ => {
         this.subject.next(this.teamIds)
-        this.getTeam()
       })
     }
   }
